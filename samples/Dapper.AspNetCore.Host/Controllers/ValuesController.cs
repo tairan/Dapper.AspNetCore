@@ -23,14 +23,19 @@ namespace Dapper.AspNetCore.Host.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            _unitOfWork.Connection.Query("select 1");
+            var list = new List<object>
+            {
+                _unitOfWork.Connection.QuerySingle<int>("select 1")
+            };
 
             _unitOfWork.ExecuteTransaction((trans) =>
             {
-                trans.Connection.Execute("select 2", transaction: trans);
+                list.Add(trans.Connection.QuerySingle<int>("select 2", transaction: trans));
+                list.Add(trans.Connection.QuerySingle<int>("select 3", transaction: trans));
+                list.Add(trans.Connection.QuerySingle<int>("select 4", transaction: trans));
             });
 
-            return new string[] { "value1", "value2" };
+            return list.Select(i => i.ToString()).ToArray();
         }
 
         // GET api/values/5
