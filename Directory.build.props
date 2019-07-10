@@ -1,0 +1,8 @@
+﻿<Project>
+  <PropertyGroup>
+    <Authors>Tairan Wang</Authors>
+    <PackageTags>Dapper, AspNetCore</PackageTags>
+    <RepositoryUrl>https://github.com/tairan/Dapper.AspNetCore</RepositoryUrl>
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+</Project>
