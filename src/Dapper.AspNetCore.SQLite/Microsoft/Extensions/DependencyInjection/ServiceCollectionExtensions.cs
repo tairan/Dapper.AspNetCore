@@ -9,12 +9,12 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection UseDapperWithSqlServer(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection UseDapperWithSQLite(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDapper();
 
             services.TryAddSingleton<IConnectionStringProvider>(new ConnectionStringProvider(configuration));
-            services.TryAddScoped<IDbConnectionFactory, SqlConnectionFactory>();
+            services.TryAddScoped<IDbConnectionFactory, SqliteConnectionFactory>();
 
             return services;
         }

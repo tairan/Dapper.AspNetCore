@@ -9,10 +9,11 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection UseDapperWithSqlServer(this IServiceCollection services)
+        public static IServiceCollection UseDapperWithSqlServer(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDapper();
 
+            services.TryAddSingleton<IConnectionStringProvider>(new ConnectionStringProvider(configuration));
             services.TryAddScoped<IDbConnectionFactory, NpgsqlConnectionFactory>();
 
             return services;

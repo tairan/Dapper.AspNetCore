@@ -11,6 +11,9 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection UseDapperWithMySQL(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddDapper();
+
+            services.TryAddSingleton<IConnectionStringProvider>(new ConnectionStringProvider(configuration));
             services.TryAddScoped<IDbConnectionFactory, MySqlConnectionFactory>();
 
             return services;

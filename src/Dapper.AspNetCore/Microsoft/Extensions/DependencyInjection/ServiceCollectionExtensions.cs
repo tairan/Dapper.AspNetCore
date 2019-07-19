@@ -11,7 +11,6 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection AddDapper(this IServiceCollection services)
         {
-            services.TryAddScoped<IConnectionStringProvider, ConnectionStringProvider>();
             services.TryAddScoped<IUnitOfWork, UnitOfWork>();
 
             return services;
